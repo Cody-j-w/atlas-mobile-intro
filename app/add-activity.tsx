@@ -8,10 +8,11 @@ export default function AddActivity() {
     const { insertActivity } = useActivitiesContext();
     return (
         <View style={styles.container}>
-            <Text>
+            <Text style={styles.header}>
                 Log an activity
             </Text>
             <TextInput
+                style={styles.input}
                 placeholder="enter steps"
                 keyboardType="number-pad"
                 onChangeText={(value) => setSteps(parseInt(value))}
@@ -20,12 +21,14 @@ export default function AddActivity() {
                 insertActivity(steps, new Date());
                 router.replace('/');
             }}>
-                <Button title="Add steps">
-                </Button>
+                <Text style={styles.addActivityButton}>
+                    Add an activity
+                </Text>
             </Pressable>
             <Pressable>
-                <Button title="Go back" onPress={() => { router.replace('/'); }}>
-                </Button>
+                <Text style={styles.backButton} onPress={() => { router.replace('/'); }}>
+                    Go back
+                </Text>
             </Pressable>
         </View>
     )
@@ -35,9 +38,40 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignContent: "center",
+        marginTop: 50,
+        backgroundColor: "white",
+        paddingTop: 10
     },
-    text: {
-        color: "white"
+    header: {
+        fontSize: 24,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    input: {
+        width: "100%",
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 2,
+        marginTop: 15,
+        marginBottom: 15
+    },
+    backButton: {
+        backgroundColor: "#D00414",
+        padding: 10,
+        width: "100%",
+        textAlign: "center",
+        fontSize: 18,
+        color: "#FFFFFF"
+    },
+    addActivityButton: {
+        backgroundColor: "#1ED2AF",
+        padding: 10,
+        width: "100%",
+        justifyContent: "center",
+        alignContent: "center",
+        textAlign: "center",
+        fontSize: 18,
+        color: "#FFFFFF"
     }
 });
