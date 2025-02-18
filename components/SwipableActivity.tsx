@@ -4,25 +4,25 @@ import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { useActivitiesContext } from "./ActivitiesProvider";
 
 export default function SwipableActivity(props: ActivityProps) {
-    const { deleteActivity } = useActivitiesContext();
     return (
         <View key={props.activity.id} style={styles.container}>
             <Swipeable
-                renderLeftActions={() => <Action text="delete" />}
-                renderRightActions={() => <Action text="delete" />}
-                onSwipeableOpen={() => {
-                    deleteActivity(props.activity.id)
-                }}>
+                renderLeftActions={() => <Action text="delete" id={props.activity.id} />}
+                renderRightActions={() => <Action text="delete" id={props.activity.id} />}
+            >
                 <Activity activity={props.activity} />
             </Swipeable>
         </View>
     )
 }
 
-export const Action = ({ text }: { text: string }) => {
+export const Action = ({ text, id }: { text: string, id: number }) => {
+    const { deleteActivity } = useActivitiesContext();
     return (
         <View style={styles.actionView}>
-            <Text>{text}</Text>
+            <Text style={styles.actionText} onPress={() => {
+                deleteActivity(id)
+            }}>{text}</Text>
         </View>
     )
 }
@@ -45,5 +45,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         height: "100%",
         padding: 10
+    },
+    actionText: {
+        color: "#FFFFFF",
+        fontSize: 18
     }
 })
