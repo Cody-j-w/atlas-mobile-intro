@@ -22,7 +22,7 @@ export default function AddActivity() {
                 router.replace('/');
             }}>
                 <Text style={styles.addActivityButton}>
-                    Add an activity
+                    Enter steps
                 </Text>
             </Pressable>
             <Pressable>
